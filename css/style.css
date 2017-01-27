@@ -4,3 +4,22 @@ body {
     font-family: arial;
     font-size: 1.7vh;
 }
+
+.ingredients {
+    color: #ff0055;
+    text-transform: uppercase;
+}
+
+#drinks {
+    color: #FFFFFF;
+    background-color: #000000;
+}
+
+figure:hover {
+    text-transform: uppercase;
+    background-color: #FF0000;
+}
+
+checkbox:hover {
+    text-transform: uppercase;
+}
