@@ -2,25 +2,26 @@
 <html lang="en">
 
     <head>
-	
-	<title>Page title shown in window title</title>
+      <title>Page title shown in window title</title>
+      
 	<meta charset="utf-8"/>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<!-- Så här kommenterar man -->
-	
+        <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- Så här kommenterar man -->
+
     </head>
 
     <body>
-	
-	<main>
+     	<main>
 
 	    <h1> Welcome to Burger Pub </h1>
-
+            <header>
+            </header>
 	    <section id="burgers">
 		<h2> Välj en hamburgare </h2>
 
 		Välj burgaren som kunden vill köpa här:<br>
-		<table>
+		<table id="hamburger_table">
 		    <thead>
 			<th>Hamburgare</th>
 			<th>Cheeseburgare</th>
@@ -75,8 +76,8 @@
 	    <section id="drinks">
 		
 		<h2> Välj en dricka </h2>
-
-		<table>
+                Välj drickan som kunden vill ha här:<br>
+		<table id="drink_table">
 		    <thead>
 			<th>Läsk</th>
 			<th>Kaffe</th>
@@ -106,7 +107,7 @@
 			    <form>
 				<input type="checkbox" name="sort" value="mjölk"> Mjölk<br>
 				<input type="checkbox" name="sort" value="socker"> Socker<br>
-				<input type="submit" value="Skicka beställning">
+				<input type="button" class="button" value="Skicka beställning">
 			    </form> 
 			    
 			</td>
