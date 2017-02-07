@@ -1,10 +1,18 @@
-/* så här kommenterar man i css */
-
+/* Blocks */
 body {
     font-family: arial;
     font-size: 1.7vh;
 }
 
+th {
+    padding: 10px;
+}
+
+dt {
+    text-align: center;
+}
+
+/* classes */
 .h {
     float: left;
     margin:0 0 30px 0;
@@ -16,6 +24,22 @@ body {
  
 }
 
+.ingredients {
+    color: #ff0055;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.button {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: 10px;
+    border-color: #FFFFFF;
+    padding: 8px;
+    margin: 5px 5px;
+}
+
+/* ID's */
 #headline {
     padding: 0 0 0 5px;
     position: absolute;
@@ -23,12 +47,6 @@ body {
 
 #header_background {
     opacity: 0.5;   
-}
-
-.ingredients {
-    color: #ff0055;
-    text-transform: uppercase;
-    text-align: center;
 }
 
 #drinks {
@@ -44,15 +62,6 @@ figure:hover {
     background-color: #FF0000;
 }
 
-.button {
-    background-color: #FF0000;
-    color: #FFFFFF;
-    border: 10px;
-    border-color: #FFFFFF;
-    padding: 8px;
-    margin: 5px 5px;
-}
-
 #hamburger_table {
     border: 3px dashed black;
     width: 60%;
@@ -65,13 +74,9 @@ figure:hover {
     margin: 5px 1px 1px 10px;
 }
 
-th {
-    padding: 10px;
-}
 
-dt {
-    text-align: center;
-}
+
+
 
 
 
