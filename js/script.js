@@ -50,24 +50,25 @@ var chickenWings = new Menu('Chicken Wings', 750, false, false, 'chicken_wings.j
 /*
  * The drinks avalible for purchase
  */
-var sofDrinks = new Menu('Läsk', 100, false, false, 'softdrinks.jpg');
+var softDrinks = new Menu('Läsk', 100, false, false, 'softdrinks.jpg');
 var beer = new Menu('Öl', 500, false, false, 'öl.jpeg');
 var coffee = new Menu('Kaffe', 50, false, false, 'kaffe.jpeg');
 
 var food = [burger, hotDog, nachos, sallad, chickenWings];
-var drinks = [softDrinks, beer, coffee]
+var drinks = [softDrinks, beer, coffee];
 
 
 var dish;
-var table = '';
-var table_head = '<thead>';
+var burger_table = ''; // stängs aldrig
+var burger_table_head = '<thead>'; // stängs aldrig
+
 
 for (dish in food) {
 
-    console.log(food[dish].getImgURL());
+    //console.log(food[dish].getImgURL());
     //console.log(food[dish].getProductInfo());
-    table_head += createTableHead(food[dish]);
-    table += createTable(food[dish]);
+    burger_table_head += createTableHead(food[dish]);
+    burger_table += createTable(food[dish]);
 
 
     /*
@@ -77,8 +78,12 @@ for (dish in food) {
     console.log(createTable(food[dish]));
 }
 
-document.getElementById('burger_table').innerHTML = table;
-document.getElementById('burger_head').innerHTML = table_head;
+for (drink in drinks) {
+    
+}
+
+document.getElementById('burger_table').innerHTML = burger_table;
+document.getElementById('burger_head').innerHTML = burger_table_head;
 
 function createTableHead(data) {
     return "<th>" + data.getName() + "</th>";
