@@ -36,6 +36,14 @@ function Menu (name, kcal, gluten, lactose, image_src) {
     this.loadImage = function() {
         return "<img src=" + this.getImgURL() + " width=" + image_width + ">";
     }
+
+    this.containsGluten = function() {
+        return this.gluten;
+    }
+
+    this.containsLactose = function () {
+        return this.lactose;
+    }
 }
 
 /*
@@ -62,35 +70,54 @@ var dish;
 var burger_table = ''; // stängs aldrig
 var burger_table_head = '<thead>'; // stängs aldrig
 
-
 for (dish in food) {
-
-    //console.log(food[dish].getImgURL());
-    //console.log(food[dish].getProductInfo());
     burger_table_head += createTableHead(food[dish]);
     burger_table += createTable(food[dish]);
-
-
-    /*
-    document.getElementById('burgers').innerHTML += '<br>' + food[dish].getProductInfo() + '<br>';
-    document.getElementById('burgers').appendChild(food[dish].getImage());
-    */
-    console.log(createTable(food[dish]));
-}
-
-for (drink in drinks) {
-    
 }
 
 document.getElementById('burger_table').innerHTML = burger_table;
 document.getElementById('burger_head').innerHTML = burger_table_head;
+
+var drink;
+var drink_table = ''; // stängs aldrig
+var drink_table_head = '<thead>'; // stängs aldrig
+
+for (drink in drinks) {
+    drink_table_head += createTableHead(drinks[drink]);
+    drink_table += createTable(drinks[drink]);
+}
+
+document.getElementById('drink_table').innerHTML = drink_table;
+document.getElementById('drink_head').innerHTML = drink_table_head;
 
 function createTableHead(data) {
     return "<th>" + data.getName() + "</th>";
 }
 
 function createTable(data) {
-    return "<td>" + data.loadImage() + "</td>";
+
+    var tbl = "<td>" + data.loadImage() + "</td>";
+
+    if (data.containsGluten()) {
+        tbl += "<ol><li>Innehåller:</li></ol>";
+    }
+    if (data.containsLactose()) {
+        tbl += "<ol><li>Innehåller:</li></ol>";
+    }
+            
+    return tbl;
+}
+
+function docLoaded(fn) {
+	if (document.readyState !== 'loading'){
+		fn();
+	} else {
+		document.addEventListener('DOMContentLoaded', fn);
+	}
+}
+
+function indexPageLoaded() {
+	displayItems();
 }
 
 
