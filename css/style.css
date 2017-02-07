@@ -16,12 +16,11 @@ dt {
 .h {
     float: left;
     margin:0 0 30px 0;
-    padding: 5px 0 0 0 ;
+    padding: 10px;
     width: 100%;
     height: auto;
     margin: 5px 1px 1px 10px;
     overflow:hidden;
- 
 }
 
 .ingredients {
@@ -39,6 +38,10 @@ dt {
     margin: 5px 5px;
 }
 
+.clear {
+    clear: both;
+}
+
 /* ID's */
 #headline {
     padding: 0 0 0 5px;
@@ -52,27 +55,37 @@ dt {
 #drinks {
     color: #FFFFFF;
     background-color: #000000;
+    border: 3px dashed #FFF;
+    width: 60%;
+    margin: 10px;
+    padding: 10px;
 }
 
+#burgers {
+    color: #000;
+    background-color: #FFF;
+    border: 3px dashed #000;
+    width: 60%;
+    margin: 10px; /* trbl */
+    padding: 10px;
+}
+/*
+#burgers h2 {
+    margin-left: 5px;
+}
+
+#burgers p {
+    margin-left: 10px;
+}
+*/
 #smak {
     margin: 5px 5px
 }
+
 figure:hover {
-    text-transform: uppercase;
-    background-color: #FF0000;
+     background-color: #FF0000;
 }
 
-#hamburger_table {
-    border: 3px dashed black;
-    width: 60%;
-    margin: 5px 1px 1px 10px;
-}
-
-#drink_table {
-    border: 3px dashed white;
-    width: 60%;
-    margin: 5px 1px 1px 10px;
-}
 
 
 

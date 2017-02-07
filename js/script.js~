@@ -1,0 +1,10 @@
+function Menu (name, kcal, gluten, lactose) {
+    this.foodName = name;
+    this.foodKcal = kcal;
+    this.gluten = gluten;
+    this.lactose = lactose;
+
+    this.getProductInfo = function() {
+        return "Name: " + this.foodName + " contains " + this.kcal + " calories.";
+    };
+}
