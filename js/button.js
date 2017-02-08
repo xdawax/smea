@@ -1,3 +1,16 @@
+
+new Vue({
+    el: '#v_button',
+
+    data: {
+        title: 'New Button'
+    },
+
+    methods: {
+        confirmOrder: confirmOrder(food, drinks)
+    }
+})
+
 function getOrderedFood(food) {
 
     var orderedFood = "\nMat: \n";
@@ -17,7 +30,6 @@ function getOrderedFood(food) {
         orderedFood += "Ingen mat beställd!\n";
     }
 
-    
     return orderedFood;
 }
 
