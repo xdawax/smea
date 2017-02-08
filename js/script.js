@@ -83,7 +83,7 @@ function displayItems() {
     for (dish in food) {
         burgerTableHead += createTableHead(food[dish]);
         burgerTable += createTable(food[dish]);
-        setImages(food[dish]);
+        //todo: setImages(food[dish]);
     }
 
     document.getElementById('burger_table').innerHTML = burgerTable;
@@ -96,11 +96,23 @@ function displayItems() {
     for (drink in drinks) {
         drinkTableHead += createTableHead(drinks[drink]);
         drinkTable += createTable(drinks[drink]);
+       // todo: setImages(drinks[drink]);
     }
 
     document.getElementById('drink_table').innerHTML = drinkTable;
     document.getElementById('drink_head').innerHTML = drinkTableHead;
 
+    var orderButton = document.getElementById('order_button');
+    orderButton.addEventListener("click", confirmOrder);
+
+}
+
+function confirmOrder() {
+    var orderButton = document.getElementById('order_button');
+
+    button.
+
+    
 }
 
 function createTableHead(data) {
