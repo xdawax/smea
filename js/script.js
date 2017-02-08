@@ -110,7 +110,7 @@ function displayItems() {
 function confirmOrder() {
     var orderButton = document.getElementById('order_button');
 
-    button.
+   // button.
 
     
 }
