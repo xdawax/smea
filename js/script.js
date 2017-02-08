@@ -60,9 +60,9 @@ function displayItems() {
     /*
      * The food avalible for purchase
      */
-    var burger = new Menu('Hamburger', 1337, true, false, 'hamburger.png');
+    var burger = new Menu('Hamburger', 1337, true, true, 'hamburger.png');
     var hotDog = new Menu('Hot Dog', 500, true, false, 'hotdog.jpg');
-    var nachos = new Menu('Nachos', 2000, true, true, 'nachos.png');
+    var nachos = new Menu('Nachos', 2000, false, true, 'nachos.png');
     var sallad = new Menu('Sallad', 200, false, false, 'sallad.jpg');
     var chickenWings = new Menu('Chicken Wings', 750, false, false, 'chicken_wings.jpg');
 
@@ -104,7 +104,9 @@ function displayItems() {
     document.getElementById('drink_head').innerHTML = drinkTableHead;
 
     var orderButton = document.getElementById('order_button');
-    orderButton.addEventListener("click", confirmOrder);
+    orderButton.addEventListener("click", function(){
+        confirmOrder(food, drinks);
+    });
 
 }
 
@@ -127,8 +129,32 @@ function createCoffeeAccessory() {
      
     return cList;
 }
+
+function getOrderedFood(food) {
+
+    var orderedFood = "\nMat: \n";
+    var isOrdered;
+    
+    for (dish in food) {
+        orderedFood += food[dish].getName() + "\n";
+    }
+
+    
+    return orderedFood;
+}
+
+function getOrderedDrinks(drinks) {
+    var orderedDrinks = "\nDricka: \n";
+    var isOrdered;
+
+    for (flavour in drinks) {
+        orderedDrinks += drinks[flavour].getName() + "\n";
+    }
+
+    return orderedDrinks;
+}
         
-function confirmOrder() {
+function confirmOrder(food, drinks) {
     var orderButton = document.getElementById('order_button');
 
     if (orderButton.style.color === "red") {
@@ -141,7 +167,13 @@ function confirmOrder() {
     var drink = document.getElementById('select_soft_drink');
     console.log(drink.value);
 
-    var order = "Läsk:\n" + drink.value;
+    var order = "";
+
+    order += getOrderedFood(food);
+
+    order += getOrderedDrinks(drinks);
+    
+    order += "Läsk:\n" + drink.value;
 
     order += "\n\Kaffe:\n";
     order += getCoffeeStatus();
@@ -183,7 +215,7 @@ function createTable(data) {
 
     var tbl = "<td>" + data.loadImage();
 
-    tbl += "<br><input type=\"checkbox\" name=\"select\" id=" + data.getName() + "\"></input><br>";
+    tbl += "<br><input type=\"checkbox\" name=\"select\" id=" + data.getName() + "_box" + "\"></input><br>";
 
     if (data.containsGluten() || data.containsLactose()) {
         tbl += "<ul>Innehåller:";
