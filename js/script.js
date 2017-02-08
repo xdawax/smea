@@ -61,10 +61,10 @@ function displayItems() {
      * The food avalible for purchase
      */
     var burger = new Menu('Hamburger', 1337, true, true, 'hamburger.png');
-    var hotDog = new Menu('Hot Dog', 500, true, false, 'hotdog.jpg');
+    var hotDog = new Menu('HotDog', 500, true, false, 'hotdog.jpg');
     var nachos = new Menu('Nachos', 2000, false, true, 'nachos.png');
     var sallad = new Menu('Sallad', 200, false, false, 'sallad.jpg');
-    var chickenWings = new Menu('Chicken Wings', 750, false, false, 'chicken_wings.jpg');
+    var chickenWings = new Menu('ChickenWings', 750, false, false, 'chicken_wings.jpg');
 
     /*
      * The drinks avalible for purchase
@@ -136,7 +136,17 @@ function getOrderedFood(food) {
     var isOrdered;
     
     for (dish in food) {
-        orderedFood += food[dish].getName() + "\n";
+        var boxName = food[dish].getName() + "_box";
+        isOrdered = document.getElementById(boxName).checked;
+
+        if (isOrdered) {
+            console.log(boxName);
+            orderedFood += food[dish].getName() + "\n";
+        }
+    }
+
+    if (orderedFood === "\nMat: \n") {
+        orderedFood += "Ingen mat beställd!\n";
     }
 
     
@@ -148,9 +158,30 @@ function getOrderedDrinks(drinks) {
     var isOrdered;
 
     for (flavour in drinks) {
-        orderedDrinks += drinks[flavour].getName() + "\n";
+        var boxName = drinks[flavour].getName() + "_box";
+        isOrdered = document.getElementById(boxName).checked;
+
+        var drinkType = drinks[flavour].getName();
+        
+        if (isOrdered) {
+            if (drinkType === "Läsk") {
+                var drink = document.getElementById('select_soft_drink');
+                orderedDrinks += drink.value + "\n";
+            }
+            else if (drinkType === "Kaffe") {
+                orderedDrinks += drinkType+ ", " ;
+                orderedDrinks += getCoffeeStatus() + "\n";
+            }
+            else {
+                orderedDrinks += drinkType + "\n";
+            }
+        }
     }
 
+    if (orderedDrinks === "\nDricka: \n") {
+        orderedDrinks += "Ingen dricka beställd!\n";
+    }
+    
     return orderedDrinks;
 }
         
@@ -164,19 +195,11 @@ function confirmOrder(food, drinks) {
         orderButton.style.color = "red";
     }
 
-    var drink = document.getElementById('select_soft_drink');
-    console.log(drink.value);
-
     var order = "";
 
     order += getOrderedFood(food);
-
     order += getOrderedDrinks(drinks);
     
-    order += "Läsk:\n" + drink.value;
-
-    order += "\n\Kaffe:\n";
-    order += getCoffeeStatus();
     
     var send = confirm(order);
 
@@ -195,13 +218,13 @@ function getCoffeeStatus() {
     var milk = document.getElementById("milk").checked;
 
     if (sugar) {
-        accessories += "Socker\n";
+        accessories += "Socker ";
     }
     if (milk) {
-        accessories += "Mjölk\n";
+        accessories += "Mjölk";
     }
     if (!sugar && !milk) {
-        accessories += "Vanligt svart\n";
+        accessories += "Vanligt svart";
     }
     
     return accessories;
@@ -214,9 +237,11 @@ function createTableHead(data) {
 function createTable(data) {
 
     var tbl = "<td>" + data.loadImage();
+    var boxName = data.getName() + "_box";
 
-    tbl += "<br><input type=\"checkbox\" name=\"select\" id=" + data.getName() + "_box" + "\"></input><br>";
-
+    tbl += "<br><input type=\"checkbox\" name=\"food\" id=" + boxName + "></input>";
+    //tbl += "<br><input type=\"checkbox\" name=\"food\" id=" + boxName + "\"></input><br>";
+    console.log(boxName);
     if (data.containsGluten() || data.containsLactose()) {
         tbl += "<ul>Innehåller:";
     }
