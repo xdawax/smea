@@ -1,4 +1,5 @@
 var imageWidth = 150;
+var avalibleSoftDrinks = ['Coca Cola', 'Fanta', 'Sprite'];
 
 function Menu (name, kcal, gluten, lactose, imageSrc) {
     this.foodName = name;
@@ -107,12 +108,71 @@ function displayItems() {
 
 }
 
+function createSoftDrinkDropDown() {
+    var dDown = "<br><select id=\"select_soft_drink\" name=\"ssd\">";
+
+    for (flavour in avalibleSoftDrinks) {
+        dDown += "<option>" + avalibleSoftDrinks[flavour] + "</option>";
+    }
+
+    dDown += "</select>";
+    
+    return dDown;
+}
+
+function createCoffeeAccessory() {
+
+    var cList = "<br><input type=\"checkbox\" name=\"extra\" id=\"sugar\"> Socker</input><br>";
+    cList += "<input type=\"checkbox\" name=\"extra\" id=\"milk\"> Mjölk </input>";
+     
+    return cList;
+}
+        
 function confirmOrder() {
     var orderButton = document.getElementById('order_button');
 
-   // button.
+    if (orderButton.style.color === "red") {
+        orderButton.style.color = "blue";
+    }
+    else {
+        orderButton.style.color = "red";
+    }
 
+    var drink = document.getElementById('select_soft_drink');
+    console.log(drink.value);
+
+    var order = "Läsk:\n" + drink.value;
+
+    order += "\n\Kaffe:\n";
+    order += getCoffeeStatus();
     
+    var send = confirm(order);
+
+    if (send == true) {
+        alert("Bestälning skickad!");
+    } else {
+        alert("Beställning avbruten!");
+    } 
+}
+
+function getCoffeeStatus() {
+
+    var accessories = '';
+
+    var sugar = document.getElementById("sugar").checked;
+    var milk = document.getElementById("milk").checked;
+
+    if (sugar) {
+        accessories += "Socker\n";
+    }
+    if (milk) {
+        accessories += "Mjölk\n";
+    }
+    if (!sugar && !milk) {
+        accessories += "Vanligt svart\n";
+    }
+    
+    return accessories;
 }
 
 function createTableHead(data) {
@@ -123,15 +183,32 @@ function createTable(data) {
 
     var tbl = "<td>" + data.loadImage();
 
-    if (data.containsGluten()) {
-        tbl += "<ol><li>Innehåller:</li></ol>";
-    }
-    if (data.containsLactose()) {
-        tbl += "<ol><li>Innehåller:</li></ol>";
+    tbl += "<br><input type=\"checkbox\" name=\"select\" id=" + data.getName() + "\"></input><br>";
+
+    if (data.containsGluten() || data.containsLactose()) {
+        tbl += "<ul>Innehåller:";
     }
 
+    if (data.containsGluten()) {
+        tbl += "<li>Gluten</li>";
+    }
+    if (data.containsLactose()) {
+        tbl += "<li>Laktos</li>";
+    }
+    // to close the ul
+    if (data.containsGluten() || data.containsLactose()) {
+        tbl += "</ul>";
+    }
+
+        if (data.getName() === 'Läsk') {
+        tbl += createSoftDrinkDropDown();
+    }
+    else if (data.getName() === 'Kaffe') {
+        tbl += createCoffeeAccessory();
+    }
     tbl += "</td>";
-    
+
+
     return tbl;
 }
 
