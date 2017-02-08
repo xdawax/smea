@@ -1,15 +1,15 @@
-var image_width = 150;
+var imageWidth = 150;
 
-function Menu (name, kcal, gluten, lactose, image_src) {
+function Menu (name, kcal, gluten, lactose, imageSrc) {
     this.foodName = name;
     this.foodKcal = kcal;
     this.gluten = gluten;
     this.lactose = lactose;
-    this.image_src = image_src
+    this.imageSrc = imageSrc
     this.image = document.createElement("img");
-    this.image.src = 'img/' + image_src;
-   
-   this.getProductInfo = function() {
+    this.image.src = 'img/' + imageSrc;
+    
+    this.getProductInfo = function() {
         return this.foodName + ' contains ' + this.foodKcal + ' calories.';
     };
     
@@ -34,7 +34,7 @@ function Menu (name, kcal, gluten, lactose, image_src) {
     }
 
     this.loadImage = function() {
-        return "<img src=" + this.getImgURL() + " width=" + image_width + ">";
+        return "<img src=" + this.getImgURL() + " width=" + imageWidth + ">";
     }
 
     this.containsGluten = function() {
@@ -46,49 +46,62 @@ function Menu (name, kcal, gluten, lactose, image_src) {
     }
 }
 
+function setImages(data) {
+    var img = data.getImage();
+    img.setAttribute('src', data.getImgURL);
+}
 /*
- * The food avalible for purchase
+var img = crete the image
+img.setAttribute('src', 'the value to set img');
 */
-var burger = new Menu('Hamburger', 1337, true, false, 'hamburger.png');
-var hotDog = new Menu('Hot Dog', 500, true, false, 'hotdog.jpg');
-var nachos = new Menu('Nachos', 2000, true, true, 'nachos.png');
-var sallad = new Menu('Sallad', 200, false, false, 'sallad.jpg');
-var chickenWings = new Menu('Chicken Wings', 750, false, false, 'chicken_wings.jpg');
+function displayItems() {
 
-/*
- * The drinks avalible for purchase
- */
-var softDrinks = new Menu('Läsk', 100, false, false, 'softdrinks.jpg');
-var beer = new Menu('Öl', 500, false, false, 'öl.jpeg');
-var coffee = new Menu('Kaffe', 50, false, false, 'kaffe.jpeg');
+    /*
+     * The food avalible for purchase
+     */
+    var burger = new Menu('Hamburger', 1337, true, false, 'hamburger.png');
+    var hotDog = new Menu('Hot Dog', 500, true, false, 'hotdog.jpg');
+    var nachos = new Menu('Nachos', 2000, true, true, 'nachos.png');
+    var sallad = new Menu('Sallad', 200, false, false, 'sallad.jpg');
+    var chickenWings = new Menu('Chicken Wings', 750, false, false, 'chicken_wings.jpg');
 
-var food = [burger, hotDog, nachos, sallad, chickenWings];
-var drinks = [softDrinks, beer, coffee];
+    /*
+     * The drinks avalible for purchase
+     */
+    var softDrinks = new Menu('Läsk', 100, false, false, 'softdrinks.jpg');
+    var beer = new Menu('Öl', 500, false, false, 'öl.jpeg');
+    var coffee = new Menu('Kaffe', 50, false, false, 'kaffe.jpeg');
+
+    var food = [burger, hotDog, nachos, sallad, chickenWings];
+    var drinks = [softDrinks, beer, coffee];
 
 
-var dish;
-var burger_table = ''; // stängs aldrig
-var burger_table_head = '<thead>'; // stängs aldrig
+    var dish;
+    var burgerTable = ''; 
+    var burgerTableHead = ''; 
 
-for (dish in food) {
-    burger_table_head += createTableHead(food[dish]);
-    burger_table += createTable(food[dish]);
+    for (dish in food) {
+        burgerTableHead += createTableHead(food[dish]);
+        burgerTable += createTable(food[dish]);
+        setImages(food[dish]);
+    }
+
+    document.getElementById('burger_table').innerHTML = burgerTable;
+    document.getElementById('burger_head').innerHTML = burgerTableHead;
+
+    var drink;
+    var drinkTable = ''; 
+    var drinkTableHead = ''; 
+
+    for (drink in drinks) {
+        drinkTableHead += createTableHead(drinks[drink]);
+        drinkTable += createTable(drinks[drink]);
+    }
+
+    document.getElementById('drink_table').innerHTML = drinkTable;
+    document.getElementById('drink_head').innerHTML = drinkTableHead;
+
 }
-
-document.getElementById('burger_table').innerHTML = burger_table;
-document.getElementById('burger_head').innerHTML = burger_table_head;
-
-var drink;
-var drink_table = ''; // stängs aldrig
-var drink_table_head = '<thead>'; // stängs aldrig
-
-for (drink in drinks) {
-    drink_table_head += createTableHead(drinks[drink]);
-    drink_table += createTable(drinks[drink]);
-}
-
-document.getElementById('drink_table').innerHTML = drink_table;
-document.getElementById('drink_head').innerHTML = drink_table_head;
 
 function createTableHead(data) {
     return "<th>" + data.getName() + "</th>";
@@ -96,7 +109,7 @@ function createTableHead(data) {
 
 function createTable(data) {
 
-    var tbl = "<td>" + data.loadImage() + "</td>";
+    var tbl = "<td>" + data.loadImage();
 
     if (data.containsGluten()) {
         tbl += "<ol><li>Innehåller:</li></ol>";
@@ -104,7 +117,9 @@ function createTable(data) {
     if (data.containsLactose()) {
         tbl += "<ol><li>Innehåller:</li></ol>";
     }
-            
+
+    tbl += "</td>";
+    
     return tbl;
 }
 
