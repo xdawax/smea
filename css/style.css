@@ -35,6 +35,8 @@ dt {
     border-color: #FFFFFF;
     padding: 8px;
     margin: 5px 5px;
+    height: 20px;
+    width: 100px;
 }
 
 .clear {
@@ -63,7 +65,7 @@ dt {
     padding: 10px;
 }
 
-#burgers {
+#food {
     color: #000;
     background-color: #FFF;
     border: 3px dashed #000;
@@ -71,6 +73,24 @@ dt {
     margin: 10px; /* trbl */
     padding: 10px;
 }
+
+.menuTable {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    height: 100px;
+    width: auto;
+}
+
+table {
+    align: center;
+}
+
 /*
 #burgers h2 {
     margin-left: 5px;
@@ -84,10 +104,15 @@ dt {
     margin: 5px 5px
 }
 
-figure:hover {
-     background-color: #FF0000;
+#order_button:hover {
+    background-color: #0F0;
+    cursor: pointer;
 }
 
+#food_table {
+    height: 200px;
+
+}
 
 
 
