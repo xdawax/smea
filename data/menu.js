@@ -66,5 +66,5 @@ var drink = [
 ];
 
 
-
+var avalibleSoftDrinks = ['Coca Cola', 'Fanta', 'Sprite'];
 

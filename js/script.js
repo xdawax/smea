@@ -1,5 +1,5 @@
 var imageWidth = 150;
-var avalibleSoftDrinks = ['Coca Cola', 'Fanta', 'Sprite'];
+
 
 /*
   TODO: move avalible soft drinks to json file and fix dd list
@@ -23,6 +23,23 @@ function displayItems()
     createSoftDrinkDD();
     createCoffeeExtras();
 
+    var orderButton = document.getElementById('orderButton');
+
+    orderButton.addEventListener("click", sendOrder);
+
+}
+
+function sendOrder()
+{
+
+    var addMilk = document.getElementById('extraMilk').checked;
+    var addSugar = document.getElementById('extraSugar').checked;
+    var sodaFlavour = document.getElementById('drinkSelector').value;
+
+    console.log(sodaFlavour);
+    console.log(addMilk);
+    console.log(addSugar);
+    alert("order sent");
 }
 
 function createSoftDrinkDD()
@@ -57,7 +74,7 @@ function createCoffeeExtras()
     var sugar = document.createTextNode('Sugar');
 
     input.setAttribute('type', 'checkBox');
- 
+    input.setAttribute('id', 'extraMilk');
     input.setAttribute('class', 'coffeeExtra');
 
     input.appendChild(milk);
@@ -69,7 +86,7 @@ function createCoffeeExtras()
     input = document.createElement('input');
 
     input.setAttribute('type', 'checkBox');
-    input.setAttribute('value', 'sugar');
+    input.setAttribute('id', 'extraSugar');
     input.setAttribute('class', 'coffeeExtra');
 
     input.appendChild(sugar);
@@ -80,14 +97,12 @@ function createCoffeeExtras()
     console.log(sugar);
     
 }
-    
+
 
 function createFoodTableHead(table)
 {
-
-    var length = food.length;
     
-    for (i = 0; i < length; i++) {
+    for (i in food) {
         var tableHead = document.createElement('th');
         var name = document.createTextNode(food[i].name);
 
@@ -102,9 +117,9 @@ function createDrinkTableHead(table)
 
     var length = drink.length;
     
-    for (i = 0; i < length; i++) {
+    for (flavour in drink) {
         var tableHead = document.createElement('th');
-        var name = document.createTextNode(drink[i].name);
+        var name = document.createTextNode(drink[flavour].name);
 
         tableHead.appendChild(name);
         table.appendChild(tableHead);
@@ -115,22 +130,18 @@ function createDrinkTableHead(table)
 function createFoodTable(table)
 {
 
-    // var burgerTable = document.getElementById('food_table');
-
-    var length = food.length;
-
-    for (i = 0; i < length; i++) {
+    for (dish in food) {
 
         var tableRow = document.createElement('td');
-        var name = document.createTextNode(food[i].name);
+        var name = document.createTextNode(food[dish].name);
         var img = document.createElement('IMG');
 
-        img.setAttribute('src', food[i].imageSrc);
+        img.setAttribute('src', food[dish].imageSrc);
         img.setAttribute('class', 'foodTable');
         tableRow.setAttribute('id', food[i].name);
 
         tableRow.appendChild(img);
-        displayAlergies(food[i], tableRow);
+        displayAlergies(food[dish], tableRow);
 
         table.appendChild(tableRow);
         console.log(name);
@@ -141,20 +152,18 @@ function createFoodTable(table)
 function createDrinkTable(table)
 {
 
-    var length = drink.length;
-
-    for (i = 0; i < length; i++) {
+    for (flavour in drink) {
 
         var tableRow = document.createElement('td');
-        var name = document.createTextNode(drink[i].name);
+        var name = document.createTextNode(drink[flavour].name);
         var img = document.createElement('IMG');
 
-        img.setAttribute('src', drink[i].imageSrc);
+        img.setAttribute('src', drink[flavour].imageSrc);
         img.setAttribute('class', 'drinkTable');
-        tableRow.setAttribute('id', drink[i].name);
+        tableRow.setAttribute('id', drink[flavour].name);
 
         tableRow.appendChild(img);
-       
+        
         table.appendChild(tableRow);
         console.log(name);
         console.log(tableRow);
@@ -192,16 +201,16 @@ function displayAlergies(food, table)
 
 function docLoaded(fn)
 {
-	if (document.readyState !== 'loading'){
-		fn();
-	} else {
-		document.addEventListener('DOMContentLoaded', fn);
-	}
+    if (document.readyState !== 'loading'){
+	fn();
+    } else {
+	document.addEventListener('DOMContentLoaded', fn);
+    }
 }
 
 function indexPageLoaded()
 {
-	displayItems();
+    displayItems();
 }
 
 
