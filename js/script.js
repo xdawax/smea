@@ -1,83 +1,12 @@
 var imageWidth = 150;
 var avalibleSoftDrinks = ['Coca Cola', 'Fanta', 'Sprite'];
 
-function Menu (name, kcal, gluten, lactose, imageSrc)
-{
-    this.foodName = name;
-    this.foodKcal = kcal;
-    this.gluten = gluten;
-    this.lactose = lactose;
-    this.imageSrc = imageSrc
-    this.image = document.createElement("img");
-    this.image.src = 'img/' + imageSrc;
-    
-    this.getProductInfo = function() {
-        return this.foodName + ' contains ' + this.foodKcal + ' calories.';
-    };
-    
-    this.printProductInfo = function() {
-    	console.log(this.getProductInfo());
-    }
-    
-    this.getImage = function() {
-    	return this.image;
-    }
-
-    this.getImgURL = function() {
-        return this.image.src;
-    }
-
-    this.getName = function() {
-        return this.foodName;
-    }
-
-    this.getKcal = function() {
-        return this.foodKcal;
-    }
-
-    this.loadImage = function() {
-        return "<img src=" + this.getImgURL() + " width=" + imageWidth + ">";
-    }
-
-    this.containsGluten = function() {
-        return this.gluten;
-    }
-
-    this.containsLactose = function () {
-        return this.lactose;
-    }
-}
-
-function setImages(data)
-{
-    var img = data.getImage();
-    img.setAttribute('src', data.getImgURL);
-}
 /*
-  var img = crete the image
-  img.setAttribute('src', 'the value to set img');
+  TODO: move avalible soft drinks to json file and fix dd list
+
 */
 function displayItems()
 {
-
-    /*
-     * The food avalible for purchase
-     */
-    var burger = new Menu('Hamburger', 1337, true, true, 'hamburger.png');
-    var hotDog = new Menu('HotDog', 500, true, false, 'hotdog.jpg');
-    var nachos = new Menu('Nachos', 2000, false, true, 'nachos.png');
-    var sallad = new Menu('Sallad', 200, false, false, 'sallad.jpg');
-    var chickenWings = new Menu('ChickenWings', 750, false, false, 'chicken_wings.jpg');
-
-    /*
-     * The drinks avalible for purchase
-     */
-    var softDrinks = new Menu('Läsk', 100, false, false, 'softdrinks.jpg');
-    var beer = new Menu('Öl', 500, false, false, 'öl.jpeg');
-    var coffee = new Menu('Kaffe', 50, false, false, 'kaffe.jpeg');
-
-    var food = [burger, hotDog, nachos, sallad, chickenWings];
-    var drinks = [softDrinks, beer, coffee];
 
     var foodHead = document.getElementById('food_head');
     var foodTable = document.getElementById('food_table')
@@ -85,64 +14,162 @@ function displayItems()
     var drinkHead = document.getElementById('drink_head');
     var drinkTable = document.getElementById('drink_table');
 
-    createTableHead(food, foodHead);
-    createTable(food, foodTable);
+    createFoodTableHead(foodHead);
+    createFoodTable(foodTable);
 
-    createTableHead(drinks, drinkHead);
-    createTable(drinks, drinkTable);
+    createDrinkTableHead(drinkHead);
+    createDrinkTable(drinkTable);
+
+    createSoftDrinkDD();
+    createCoffeeExtras();
 
 }
 
-function createTableHead(menu, table)
+function createSoftDrinkDD()
 {
 
+    var softDrinks = document.getElementById('Läsk');
+    var select = document.createElement('select');
+    select.setAttribute('id', 'drinkSelector');
     
-    for (item in menu) {
+    for (flavour in avalibleSoftDrinks) {
+
+        var name = document.createTextNode(avalibleSoftDrinks[flavour]);
+        var option = document.createElement('option');
+
+        option.appendChild(name);
+        select.appendChild(option);
+        console.log(avalibleSoftDrinks[flavour]);
+    }
+
+    console.log(softDrinks);
+
+    softDrinks.appendChild(document.createElement('br'));
+    softDrinks.appendChild(select);
+}
+
+function createCoffeeExtras()
+{
+    var coffee = document.getElementById('Kaffe');
+    var input = document.createElement('input');
+
+    var milk = document.createTextNode('Milk');
+    var sugar = document.createTextNode('Sugar');
+
+    input.setAttribute('type', 'checkBox');
+ 
+    input.setAttribute('class', 'coffeeExtra');
+
+    input.appendChild(milk);
+    
+    coffee.appendChild(document.createElement('br'));
+    coffee.appendChild(input);
+    coffee.appendChild(document.createElement('br'));
+
+    input = document.createElement('input');
+
+    input.setAttribute('type', 'checkBox');
+    input.setAttribute('value', 'sugar');
+    input.setAttribute('class', 'coffeeExtra');
+
+    input.appendChild(sugar);
+    
+    coffee.appendChild(input);
+
+    console.log(milk);
+    console.log(sugar);
+    
+}
+    
+
+function createFoodTableHead(table)
+{
+
+    var length = food.length;
+    
+    for (i = 0; i < length; i++) {
         var tableHead = document.createElement('th');
-        var name = document.createTextNode(menu[item].getName());
+        var name = document.createTextNode(food[i].name);
 
         tableHead.appendChild(name);
         table.appendChild(tableHead);
     }
 
-    
 }
 
-function createTable(menu, table)
+function createDrinkTableHead(table)
+{
+
+    var length = drink.length;
+    
+    for (i = 0; i < length; i++) {
+        var tableHead = document.createElement('th');
+        var name = document.createTextNode(drink[i].name);
+
+        tableHead.appendChild(name);
+        table.appendChild(tableHead);
+    }
+
+}
+
+function createFoodTable(table)
 {
 
     // var burgerTable = document.getElementById('food_table');
 
-    for (item in menu) {
+    var length = food.length;
+
+    for (i = 0; i < length; i++) {
 
         var tableRow = document.createElement('td');
-        var name = document.createTextNode(menu[item].getName());
+        var name = document.createTextNode(food[i].name);
         var img = document.createElement('IMG');
 
-        img.setAttribute('src', menu[item].getImgURL());
-        img.setAttribute('class', 'menuTable');
+        img.setAttribute('src', food[i].imageSrc);
+        img.setAttribute('class', 'foodTable');
+        tableRow.setAttribute('id', food[i].name);
 
         tableRow.appendChild(img);
-        displayAlergies(menu[item], tableRow);
+        displayAlergies(food[i], tableRow);
 
         table.appendChild(tableRow);
         console.log(name);
         console.log(tableRow);
+    }
+}
 
-        
+function createDrinkTable(table)
+{
 
+    var length = drink.length;
+
+    for (i = 0; i < length; i++) {
+
+        var tableRow = document.createElement('td');
+        var name = document.createTextNode(drink[i].name);
+        var img = document.createElement('IMG');
+
+        img.setAttribute('src', drink[i].imageSrc);
+        img.setAttribute('class', 'drinkTable');
+        tableRow.setAttribute('id', drink[i].name);
+
+        tableRow.appendChild(img);
+       
+        table.appendChild(tableRow);
+        console.log(name);
+        console.log(tableRow);
     }
 }
 
 function displayAlergies(food, table)
 {
-    if (!(food.containsGluten() || food.containsLactose())) {
+    if (!(food.gluten || food.lactose)) {
         return;
     }
     else {
         var unorderedList = document.createElement('ul');
 
-        if (food.containsGluten()) {
+        if (food.gluten) {
             var gluten = document.createTextNode('Gluten');
             var listElement = document.createElement('li');
 
@@ -150,7 +177,7 @@ function displayAlergies(food, table)
             unorderedList.appendChild(listElement);
         }
 
-        if (food.containsLactose()) {
+        if (food.lactose) {
             var lactose = document.createTextNode('Lactose');
             var listElement = document.createElement('li');
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Page title shown in window title</title>
+    
+    <meta charset="utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script> 
+    <script src="js/script.js"></script>
+    <script type="text/javascript" src="data/menu.js"></script>
+    
+    <script>
+      docLoaded(indexPageLoaded);
+    </script>
+    
+
+  </head>
+
+  <body>
+    <main>
+      <header class="h">
+ 	    <img id="header_background" src="img/header.jpg">
+        <h1 id="headline">Welcome to Burger Pub</h1>
+      </header>
+
+      <div class="clear"></div>
+
+      
+      <section id="food">
+        <h2> Välj kundens mat </h2>
+        <p>Välj maten som kunden vill köpa här:</p>
+
+        <table>
+          
+	      <thead>
+            <tr  id="food_head">
+            </tr>
+          </thead>
+
+	      <tbody >
+            <tr id="food_table">
+            </tr>
+	      </tbody>
+          
+	    </table>
+      </section>
+
+      
+      <section id="drinks">
+	    <h2> Välj en dricka </h2>
+        Välj drickan som kunden vill ha här:<br>
+	    <table>
+
+	      <thead id="drink_head">
+	      </thead>
+
+	      <tbody id="drink_table">
+            <!--<button id="v_button" v-bind:title="title" v-on:click="confirmOrder">confirm</button> -->
+	      </tbody>
+          
+        </table>
+
+        
+
+        
+      </section>
+
+      <button id="order_button">Bekräfta</button>
+      
+    </main>
+
+    <footer>
+      
+      &copy David Carlsson IT-2
+
+    </footer>
+    
+    
+   </body>
+  
+</html>
+
+
+

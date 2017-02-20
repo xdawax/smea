@@ -109,12 +109,17 @@ table {
     cursor: pointer;
 }
 
-#food_table {
-    height: 200px;
-
+.foodTable {
+    height: 150px;
+}
+.drinkTable {
+    height: 150px;
 }
 
-
+#Kaffe {
+    color: #FFF;
+    background-color: #0F0;
+}
 
 
 
