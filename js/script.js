@@ -25,22 +25,9 @@ function displayItems()
 
     var orderButton = document.getElementById('orderButton');
 
-    orderButton.addEventListener("click", sendOrder);
-
+ 
 }
 
-function sendOrder()
-{
-
-    var addMilk = document.getElementById('extraMilk').checked;
-    var addSugar = document.getElementById('extraSugar').checked;
-    var sodaFlavour = document.getElementById('drinkSelector').value;
-
-    console.log(sodaFlavour);
-    console.log(addMilk);
-    console.log(addSugar);
-    alert("order sent");
-}
 
 function createSoftDrinkDD()
 {
@@ -132,6 +119,11 @@ function createFoodTable(table)
 
     for (dish in food) {
 
+        var checkBoxId = food[dish].name + 'Box';
+        var checkBox = document.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+        checkBox.setAttribute('id', checkBoxId);
+       
         var tableRow = document.createElement('td');
         var name = document.createTextNode(food[dish].name);
         var img = document.createElement('IMG');
@@ -141,6 +133,7 @@ function createFoodTable(table)
         tableRow.setAttribute('id', food[i].name);
 
         tableRow.appendChild(img);
+        tableRow.appendChild(checkBox);
         displayAlergies(food[dish], tableRow);
 
         table.appendChild(tableRow);
@@ -154,6 +147,11 @@ function createDrinkTable(table)
 
     for (flavour in drink) {
 
+        var checkBoxId = drink[flavour].name + 'Box';
+        var checkBox = document.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+        checkBox.setAttribute('id', checkBoxId);
+
         var tableRow = document.createElement('td');
         var name = document.createTextNode(drink[flavour].name);
         var img = document.createElement('IMG');
@@ -163,6 +161,7 @@ function createDrinkTable(table)
         tableRow.setAttribute('id', drink[flavour].name);
 
         tableRow.appendChild(img);
+        tableRow.appendChild(checkBox);
         
         table.appendChild(tableRow);
         console.log(name);
@@ -170,9 +169,9 @@ function createDrinkTable(table)
     }
 }
 
-function displayAlergies(food, table)
+function displayAlergies(drink, table)
 {
-    if (!(food.gluten || food.lactose)) {
+    if (!(drink.gluten || food.lactose)) {
         return;
     }
     else {

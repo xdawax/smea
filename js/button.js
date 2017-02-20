@@ -1,111 +1,65 @@
-
 new Vue({
-    el: '#v_button',
+    el: '#orderButton',
 
     data: {
         title: 'New Button'
     },
 
     methods: {
-        confirmOrder: confirmOrder(food, drinks)
+        submitOrder: function () {
+            sendOrder();
+        }
     }
 })
 
-function getOrderedFood(food) {
-
-    var orderedFood = "\nMat: \n";
-    var isOrdered;
+function sendOrder()
+{
+    console.log('something');
     
+    var addMilk = document.getElementById('extraMilk').checked;
+    var addSugar = document.getElementById('extraSugar').checked;
+    var sodaFlavour = document.getElementById('drinkSelector').value;
+
     for (dish in food) {
-        var boxName = food[dish].getName() + "_box";
-        isOrdered = document.getElementById(boxName).checked;
+        var boxName = food[dish].name + 'Box';
+        var box = document.getElementById(boxName);
 
+        isOrdered = document.getElementById(food[dish].name + 'Box').checked;
+        
         if (isOrdered) {
-            console.log(boxName);
-            orderedFood += food[dish].getName() + "\n";
+            console.log(food[dish].name);
         }
     }
 
-    if (orderedFood === "\nMat: \n") {
-        orderedFood += "Ingen mat beställd!\n";
-    }
+    for (flavour in drink) {
+        var boxName = drink[flavour].name + 'Box';
+        var box = document.getElementById(boxName);
 
-    return orderedFood;
-}
-
-function getOrderedDrinks(drinks) {
-    var orderedDrinks = "\nDricka: \n";
-    var isOrdered;
-
-    for (flavour in drinks) {
-        var boxName = drinks[flavour].getName() + "_box";
-        isOrdered = document.getElementById(boxName).checked;
-
-        var drinkType = drinks[flavour].getName();
+        isOrdered = document.getElementById(drink[flavour].name + 'Box').checked;
         
         if (isOrdered) {
-            if (drinkType === "Läsk") {
-                var drink = document.getElementById('select_soft_drink');
-                orderedDrinks += drink.value + "\n";
+            if (drink[flavour].name === 'Läsk') {
+                console.log(sodaFlavour);
             }
-            else if (drinkType === "Kaffe") {
-                orderedDrinks += drinkType+ ", " ;
-                orderedDrinks += getCoffeeStatus() + "\n";
-            }
+            
+
             else {
-                orderedDrinks += drinkType + "\n";
+                console.log(drink[flavour].name);
+                
+                if (drink[flavour].name === 'Kaffe') {
+                    console.log('----------------');
+                    if (addMilk) {
+                        console.log('Mjölk');
+                    }
+                    if (addSugar) {
+                        console.log('Socker');
+                    }
+                    console.log('----------------');
+                }
             }
         }
     }
 
-    if (orderedDrinks === "\nDricka: \n") {
-        orderedDrinks += "Ingen dricka beställd!\n";
-    }
-    
-    return orderedDrinks;
-}
-        
-function confirmOrder(food, drinks) {
-    var orderButton = document.getElementById('order_button');
+    alert("order sent");
 
-    if (orderButton.style.color === "red") {
-        orderButton.style.color = "blue";
-    }
-    else {
-        orderButton.style.color = "red";
-    }
-
-    var order = "";
-
-    order += getOrderedFood(food);
-    order += getOrderedDrinks(drinks);
-    
-    
-    var send = confirm(order);
-
-    if (send == true) {
-        alert("Bestälning skickad!");
-    } else {
-        alert("Beställning avbruten!");
-    } 
-}
-
-function getCoffeeStatus() {
-
-    var accessories = '';
-
-    var sugar = document.getElementById("sugar").checked;
-    var milk = document.getElementById("milk").checked;
-
-    if (sugar) {
-        accessories += "Socker ";
-    }
-    if (milk) {
-        accessories += "Mjölk";
-    }
-    if (!sugar && !milk) {
-        accessories += "Vanligt svart";
-    }
-    
-    return accessories;
 }
