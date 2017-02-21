@@ -1,0 +1,127 @@
+/* Blocks */
+body {
+    font-family: arial;
+    font-size: 1.7vh;
+}
+
+th {
+    padding: 10px;
+}
+
+dt {
+    text-align: center;
+}
+
+/* classes */
+.h {
+    
+    margin:0 0 30px 0;
+    padding: 10px;
+    height: 100px;
+    margin: 5px 1px 1px 10px;
+    overflow: hidden;
+}
+
+.ingredients {
+    color: #ff0055;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.button {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: 10px;
+    border-color: #FFFFFF;
+    padding: 8px;
+    margin: 5px 5px;
+    height: 20px;
+    width: 100px;
+}
+
+.clear {
+    clear: both;
+}
+
+/* ID's */
+#headline {
+    padding: 0 0 0 5px;
+    position: absolute;
+    margin-top: -350px;
+}
+
+#header_background {
+    opacity: 0.5;
+    width: 60%;
+    height: auto;
+}
+
+#drinks {
+    color: #FFFFFF;
+    background-color: #000000;
+    border: 3px dashed #FFF;
+    width: 60%;
+    margin: 10px;
+    padding: 10px;
+}
+
+#food {
+    color: #000;
+    background-color: #FFF;
+    border: 3px dashed #000;
+    width: 60%;
+    margin: 10px; /* trbl */
+    padding: 10px;
+}
+
+.menuTable {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    height: 100px;
+    width: auto;
+}
+
+table {
+    align: center;
+}
+
+/*
+#burgers h2 {
+    margin-left: 5px;
+}
+
+#burgers p {
+    margin-left: 10px;
+}
+*/
+#smak {
+    margin: 5px 5px
+}
+
+#orderButton:hover {
+    cursor: pointer;
+}
+
+.foodTable {
+    height: 150px;
+}
+.drinkTable {
+    height: 150px;
+}
+
+#Kaffe {
+    color: #FFF;
+    background-color: #0F0;
+}
+
+
+
+
+
+
