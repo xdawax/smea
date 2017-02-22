@@ -1,10 +1,3 @@
-var imageWidth = 150;
-
-
-/*
-  TODO: move avalible soft drinks to json file and fix dd list
-
-*/
 function displayItems()
 {
 
@@ -22,8 +15,86 @@ function displayItems()
 
     createSoftDrinkDD();
     createCoffeeExtras();
+
+    listenForMilk();
+    listenForSodaFlavour();
+    
 }
 
+function listenForSodaFlavour()
+{
+    var sodaBox = document.getElementById('LäskBox');
+
+    sodaBox.addEventListener('change', function() {
+
+        if (sodaBox.checked) {
+
+            var drinkSelector = document.getElementById('drinkSelector');
+
+            sodaBox.setAttribute('value', drinkSelector.value);
+            
+            drinkSelector.addEventListener('change' , function() {
+                if (sodaBox.checked) {
+                    ///////////////////////////////////////
+                    // console.log(drinkSelector.value); //
+                    ///////////////////////////////////////
+                    sodaBox.setAttribute('value', drinkSelector.value);
+                }
+                else {
+                    
+                }
+            })
+            
+            //////////////////////////
+            // console.log('soda'); //
+            //////////////////////////
+        }
+        else {
+            /////////////////////////////
+            // console.log('no soda'); //
+            /////////////////////////////
+        }
+        
+        
+
+    })
+
+}
+
+function listenForMilk()
+{
+    var kaffeBox = document.getElementById('KaffeBox');
+    
+    kaffeBox.addEventListener('change', function() {
+        /////////////////////////////////
+        // console.log('Kaffe kaffe'); //
+        /////////////////////////////////
+        var milk = document.getElementById('extraMilk');
+
+        if (kaffeBox.checked) {
+            milk.addEventListener('change', function() {
+                if (milk.checked && kaffeBox.checked) {
+                    //////////////////////////
+                    // console.log('milk'), //
+                    //////////////////////////
+                    milk.setAttribute('name', 'orderBox');
+                }
+                else {
+                    /////////////////////////////
+                    // console.log('no milk'); //
+                    /////////////////////////////
+                    milk.setAttribute('name', 'extraMilk');
+                }
+            })
+        }
+        else {
+            ////////////////////////////////////
+            // console.log('no more coffee'); //
+            ////////////////////////////////////
+            milk.setAttribute('name', 'extraMilk');
+        }
+    })
+}
 
 function createSoftDrinkDD()
 {
@@ -58,15 +129,13 @@ function createCoffeeExtras()
     input.setAttribute('type', 'checkBox');
     input.setAttribute('id', 'extraMilk');
     input.setAttribute('class', 'coffeeExtra');
-    input.setAttribute('text', 'med Mjölk');
+    input.setAttribute('value', 'med Mjölk');
     
     coffee.appendChild(document.createElement('br'));
     coffee.appendChild(input);
     coffee.appendChild(milk);
 
-    if (document.getElementById('Kaffe').checked) {
-        input.setAttribute('name', 'orderBox');
-    }
+
 }
 
 
@@ -156,13 +225,17 @@ function createDrinkTable(table)
 
 function displayAlergies(food, table)
 {
-    console.log('displaying algergies');
+    //////////////////////////////////////////
+    // console.log('displaying algergies'); //
+    //////////////////////////////////////////
     if (!(food.gluten || food.lactose)) {
         return;
     }
     else {
 
-        console.log('inside else');
+        /////////////////////////////////
+        // console.log('inside else'); //
+        /////////////////////////////////
         var unorderedList = document.createElement('ul');
 
         if (food.gluten) {
